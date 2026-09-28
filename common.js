@@ -106,6 +106,7 @@
     if(last && /contact/i.test(last.textContent)){
       last.className='footer-contact';
       last.innerHTML='<h4>Contact</h4>'+
+        '<a class="fl fl-email" href="mailto:ucirvinesolarcar@gmail.com">ucirvinesolarcar@gmail.com</a>'+
         '<form class="contact-form" action="https://formsubmit.co/ucirvinesolarcar@gmail.com" method="POST">'+
         '<input type="hidden" name="_subject" value="New message from the UCI Solar Car website">'+
         '<input type="hidden" name="_captcha" value="false">'+

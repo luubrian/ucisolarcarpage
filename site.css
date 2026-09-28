@@ -1,11 +1,11 @@
 /* ============================================================
    UCI Solar Car — shared styles (about / team / support / races)
    ============================================================ */
-@font-face{font-family:'Eastman Grotesque';src:url('fonts/EastmanGrotesque-Regular.otf') format('opentype');font-weight:400;font-style:normal;font-display:swap}
-@font-face{font-family:'Eastman Grotesque';src:url('fonts/EastmanGrotesque-Italic.otf') format('opentype');font-weight:400;font-style:italic;font-display:swap}
-@font-face{font-family:'Eastman Grotesque';src:url('fonts/EastmanGrotesque-Bold.otf') format('opentype');font-weight:700;font-style:normal;font-display:swap}
-@font-face{font-family:'Eastman Grotesque';src:url('fonts/EastmanGrotesque-BoldItalic.otf') format('opentype');font-weight:700;font-style:italic;font-display:swap}
-@font-face{font-family:'Endless';src:url('fonts/Endless-Regular.ttf') format('truetype');font-weight:400;font-style:normal;font-display:swap}
+@font-face{font-family:'Eastman Grotesque';src:url('/fonts/EastmanGrotesque-Regular.otf') format('opentype');font-weight:400;font-style:normal;font-display:swap}
+@font-face{font-family:'Eastman Grotesque';src:url('/fonts/EastmanGrotesque-Italic.otf') format('opentype');font-weight:400;font-style:italic;font-display:swap}
+@font-face{font-family:'Eastman Grotesque';src:url('/fonts/EastmanGrotesque-Bold.otf') format('opentype');font-weight:700;font-style:normal;font-display:swap}
+@font-face{font-family:'Eastman Grotesque';src:url('/fonts/EastmanGrotesque-BoldItalic.otf') format('opentype');font-weight:700;font-style:italic;font-display:swap}
+@font-face{font-family:'Endless';src:url('/fonts/Endless-Regular.ttf') format('truetype');font-weight:400;font-style:normal;font-display:swap}
 :root{
   --page:#EFF1F0; --cream:#EEECDC; --royal:#0D0D63; --cobalt:#1F3973;
   --sky:#86AEDA; --jadePale:#BAE3D8; --teal:#81BAC4; --jade:#5FA3B0;
@@ -213,7 +213,7 @@ body::after{content:"";position:fixed;inset:0;z-index:9999;pointer-events:none;o
 @media(max-width:720px){.recruit-btn{font-size:10px;padding:9px 15px;top:20px;letter-spacing:.1em}}
 
 /* ---- full-screen page transition: royal panels split apart with a jade center bar (same language as the intro loader) ---- */
-#pageTrans{position:fixed;inset:0;z-index:6000;display:flex;pointer-events:none;visibility:hidden}
+#pageTrans{position:fixed;inset:0;height:100lvh;z-index:6000;display:flex;pointer-events:none;visibility:hidden}
 #pageTrans .ph{flex:1;background:var(--royal);transition:transform 1.4s var(--ease)}   /* closing */
 #pageTrans .ph.l{transform-origin:right;transform:translateX(-101%)}
 #pageTrans .ph.r{transform-origin:left;transform:translateX(101%)}
@@ -221,7 +221,7 @@ body::after{content:"";position:fixed;inset:0;z-index:9999;pointer-events:none;o
 #pageTrans.show{visibility:visible;pointer-events:all}
 #pageTrans.cover .ph{transform:translateX(0)}       /* blue panels closed over the screen */
 #pageTrans.parting .ph{transition:transform 1.9s cubic-bezier(.66,0,.34,1)}  /* parting: slower, smoother in-out */
-#pageTrans.bar .pbar{height:100vh;opacity:1}        /* center line grown, independent of the panels */
+#pageTrans.bar .pbar{height:100lvh;opacity:1}        /* center line grown, independent of the panels */
 #pageTrans.instant .ph,#pageTrans.instant .pbar{transition:none}
 @media(prefers-reduced-motion:reduce){#pageTrans{display:none}}
 

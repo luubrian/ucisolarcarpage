@@ -21,10 +21,11 @@ function buildStream(el){
 }
 document.querySelectorAll('.stream[data-stream]').forEach(buildStream);
 
-/* Lenis smooth scroll */
+/* Lenis smooth scroll (desktop only — native scroll on touch/mobile avoids jank) */
+const isMobile=matchMedia('(max-width:820px), (pointer:coarse)').matches;
 let lenis=null;
-if(window.Lenis){
-  lenis=new Lenis({lerp:0.075,wheelMultiplier:0.9,smoothWheel:true,syncTouch:true});
+if(window.Lenis && !isMobile){
+  lenis=new Lenis({lerp:0.09,wheelMultiplier:0.9,smoothWheel:true,syncTouch:false});
   window.__lenis=lenis;
   const raf=t=>{lenis.raf(t);requestAnimationFrame(raf);}; requestAnimationFrame(raf);
 }
@@ -33,7 +34,11 @@ function scrollToT(t){ if(lenis)lenis.scrollTo(t,{offset:0}); else (typeof t==='
 /* menu (cross-page aware: only intercept in-page # links) */
 const toggle=document.getElementById('menuToggle'), menu=document.getElementById('menu');
 let menuOpen=false;
-function setMenu(o){menuOpen=o;menu.classList.toggle('open',o);toggle.classList.toggle('open',o);toggle.setAttribute('aria-expanded',o);menu.setAttribute('aria-hidden',!o);if(lenis){o?lenis.stop():lenis.start();}}
+function setMenu(o){menuOpen=o;menu.classList.toggle('open',o);toggle.classList.toggle('open',o);toggle.setAttribute('aria-expanded',o);menu.setAttribute('aria-hidden',!o);if(lenis){o?lenis.stop():lenis.start();}
+  const links=menu.querySelectorAll('nav a');
+  if(o){ clearTimeout(menu._d); menu._d=setTimeout(()=>links.forEach(a=>a.style.transitionDelay='0s'),1200);} /* after the stagger, make hover instant */
+  else { clearTimeout(menu._d); links.forEach(a=>a.style.transitionDelay=''); }
+}
 if(toggle&&menu){
   toggle.addEventListener('click',()=>setMenu(!menuOpen));
   menu.querySelectorAll('[data-link]').forEach(a=>a.addEventListener('click',e=>{
@@ -67,5 +72,8 @@ if(lenis)lenis.on('scroll',({scroll})=>onScroll(scroll)); else addEventListener(
 onScroll(0);
 
 /* reveal: fade-ups, sliding images, baseline-rise headings */
+const revealEls=document.querySelectorAll('.reveal,.slide-img,.riseh,.value .v-img');
 const io=new IntersectionObserver(es=>es.forEach(e=>{ if(e.isIntersecting){ e.target.classList.add('in'); io.unobserve(e.target); } }),{threshold:.18});
-document.querySelectorAll('.reveal,.slide-img,.riseh,.value .v-img').forEach(el=>io.observe(el));
+revealEls.forEach(el=>io.observe(el));
+/* failsafe: never leave content hidden if the observer is throttled (e.g. iOS Low Power Mode) */
+addEventListener('load',()=>setTimeout(()=>revealEls.forEach(el=>el.classList.add('in')),1500));

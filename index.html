@@ -5,14 +5,14 @@
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>UCI Solar Car — Home</title>
 <meta name="description" content="UC Irvine Solar Racing — an undergraduate team engineering solar-powered race cars built to go the distance." />
-<link rel="stylesheet" href="site.css">
-<link rel="icon" href="photos/logo.png">
+<link rel="stylesheet" href="/site.css">
+<link rel="icon" href="/photos/logo.png">
 <style>
-@font-face{font-family:'Eastman Grotesque';src:url('fonts/EastmanGrotesque-Regular.otf') format('opentype');font-weight:400;font-style:normal;font-display:swap}
-@font-face{font-family:'Eastman Grotesque';src:url('fonts/EastmanGrotesque-Italic.otf') format('opentype');font-weight:400;font-style:italic;font-display:swap}
-@font-face{font-family:'Eastman Grotesque';src:url('fonts/EastmanGrotesque-Bold.otf') format('opentype');font-weight:700;font-style:normal;font-display:swap}
-@font-face{font-family:'Eastman Grotesque';src:url('fonts/EastmanGrotesque-BoldItalic.otf') format('opentype');font-weight:700;font-style:italic;font-display:swap}
-@font-face{font-family:'Endless';src:url('fonts/Endless-Regular.ttf') format('truetype');font-weight:400;font-style:normal;font-display:swap}
+@font-face{font-family:'Eastman Grotesque';src:url('/fonts/EastmanGrotesque-Regular.otf') format('opentype');font-weight:400;font-style:normal;font-display:swap}
+@font-face{font-family:'Eastman Grotesque';src:url('/fonts/EastmanGrotesque-Italic.otf') format('opentype');font-weight:400;font-style:italic;font-display:swap}
+@font-face{font-family:'Eastman Grotesque';src:url('/fonts/EastmanGrotesque-Bold.otf') format('opentype');font-weight:700;font-style:normal;font-display:swap}
+@font-face{font-family:'Eastman Grotesque';src:url('/fonts/EastmanGrotesque-BoldItalic.otf') format('opentype');font-weight:700;font-style:italic;font-display:swap}
+@font-face{font-family:'Endless';src:url('/fonts/Endless-Regular.ttf') format('truetype');font-weight:400;font-style:normal;font-display:swap}
 :root{
   --page:#EFF1F0; --cream:#EEECDC; --royal:#0D0D63; --cobalt:#1F3973;
   --sky:#86AEDA; --jadePale:#BAE3D8; --teal:#81BAC4; --jade:#5FA3B0;
@@ -241,7 +241,7 @@ body::after{content:"";position:fixed;inset:0;z-index:9999;pointer-events:none;o
 .socials-head{display:flex;justify-content:space-between;align-items:flex-end;gap:20px;flex-wrap:wrap;margin-bottom:clamp(30px,4vw,48px)}
 .socials-head h2{font-family:'Endless','Eastman Grotesque',sans-serif;font-weight:700;text-transform:uppercase;font-size:clamp(30px,4.4vw,60px);color:var(--royal);max-width:16ch}
 .ig-track-mask{display:block;overflow:hidden;-webkit-mask-image:linear-gradient(90deg,transparent,#000 6%,#000 94%,transparent);mask-image:linear-gradient(90deg,transparent,#000 6%,#000 94%,transparent)}
-.ig-track{display:flex;gap:16px;width:max-content;animation:marq 40s linear infinite}
+.ig-track{display:flex;gap:16px;width:max-content;animation:marq 55s linear infinite}
 .socials:hover .ig-track{animation-play-state:paused}
 @keyframes marq{to{transform:translateX(-50%)}}
 .ig{position:relative;width:clamp(200px,22vw,270px);aspect-ratio:1;border-radius:5px;overflow:hidden;flex:none;box-shadow:var(--shadow-sm);isolation:isolate}
@@ -251,12 +251,6 @@ body::after{content:"";position:fixed;inset:0;z-index:9999;pointer-events:none;o
 .ig:hover img{transform:scale(1.08)}
 .ig:hover::after{opacity:.22}
 .ig:hover .ico{opacity:1;transform:none}
-/* Instagram scrolling gallery (official embeds) */
-.ig-gallery{display:flex;align-items:flex-start;gap:16px;overflow-x:auto;overflow-y:hidden;scroll-snap-type:x proximity;padding:6px var(--edge) 26px;-webkit-overflow-scrolling:touch;scrollbar-width:thin;scrollbar-color:rgba(31,57,115,.35) transparent}
-.ig-gallery::-webkit-scrollbar{height:8px}
-.ig-gallery::-webkit-scrollbar-track{background:transparent}
-.ig-gallery::-webkit-scrollbar-thumb{background:rgba(31,57,115,.32);border-radius:99px}
-.ig-gallery .ig{scroll-snap-align:start;width:clamp(240px,30vw,300px)}
 .social-links{display:flex;gap:12px;flex-wrap:wrap}
 .social-links a{width:46px;height:46px;border:1px solid rgba(31,57,115,.25);border-radius:50%;display:grid;place-items:center;color:var(--cobalt);transition:transform .4s var(--ease),background .4s var(--ease),color .4s var(--ease),border-color .4s var(--ease)}
 .social-links a:hover{background:var(--royal);color:#fff;border-color:var(--royal);transform:translateY(-3px)}
@@ -293,7 +287,7 @@ body::after{content:"";position:fixed;inset:0;z-index:9999;pointer-events:none;o
 }
 @media(max-width:560px){.footer-grid{grid-template-columns:1fr}}
 </style>
-<style>html.usc-navin::before{content:"";position:fixed;inset:0;background:#0D0D63;z-index:5999}</style><script>try{if(sessionStorage.getItem('usc-nav')){document.documentElement.classList.add('usc-navin');setTimeout(function(){document.documentElement.classList.remove('usc-navin');},4000);}}catch(e){}</script>
+<style>html.usc-navin::before{content:"";position:fixed;inset:0;height:100lvh;background:#0D0D63;z-index:5999}</style><script>try{if(sessionStorage.getItem('usc-nav')){document.documentElement.classList.add('usc-navin');setTimeout(function(){document.documentElement.classList.remove('usc-navin');},4000);}}catch(e){}</script>
 </head>
 <body class="loading">
 
@@ -319,14 +313,14 @@ body::after{content:"";position:fixed;inset:0;z-index:9999;pointer-events:none;o
     <div class="menu-brand">UC Irvine Solar Car</div>
     <nav>
       <a href="#top" data-link>Home</a>
-      <a href="about-us/">About Us</a>
-      <a href="our-team/">Our Team</a>
-      <a href="our-races/">Our Races</a>
-      <a href="support-us/">Support Us</a>
-      <a href="join-us/">Join Us</a>
+      <a href="/about-us/">About Us</a>
+      <a href="/our-team/">Our Team</a>
+      <a href="/our-races/">Our Races</a>
+      <a href="/support-us/">Support Us</a>
+      <a href="/join-us/">Join Us</a>
     </nav>
     <div class="menu-foot">
-      <a href="https://www.instagram.com/ucisolarcar/" target="_blank" rel="noopener">Instagram</a><a href="https://www.linkedin.com/company/uci-solar-car/" target="_blank" rel="noopener">LinkedIn</a><a href="https://www.facebook.com/p/UC-Irvine-Solar-Car-Team-100054406393858/" target="_blank" rel="noopener">Facebook</a><a href="mailto:solarcar@uci.edu">solarcar@uci.edu</a>
+      <a href="https://www.instagram.com/ucisolarcar/" target="_blank" rel="noopener">Instagram</a><a href="https://www.linkedin.com/company/uci-solar-car/" target="_blank" rel="noopener">LinkedIn</a><a href="https://www.facebook.com/p/UC-Irvine-Solar-Car-Team-100054406393858/" target="_blank" rel="noopener">Facebook</a><a href="mailto:ucirvinesolarcar@gmail.com">ucirvinesolarcar@gmail.com</a>
     </div>
   </div>
 </div>
@@ -334,8 +328,8 @@ body::after{content:"";position:fixed;inset:0;z-index:9999;pointer-events:none;o
 <!-- ===== HERO (fixed) ===== -->
 <section class="hero" id="top">
   <div class="hero-media" id="heroMedia" aria-hidden="true">
-    <video class="hero-video" autoplay muted loop playsinline preload="auto" poster="photos/hero-poster.jpg">
-      <source src="Videos/hero-web.mp4" type="video/mp4">
+    <video class="hero-video" autoplay muted loop playsinline preload="auto" poster="/photos/hero-poster.jpg">
+      <source src="/Videos/hero-web.mp4" type="video/mp4">
     </video>
   </div>
   <div class="hero-scrim" aria-hidden="true"></div>
@@ -387,16 +381,16 @@ body::after{content:"";position:fixed;inset:0;z-index:9999;pointer-events:none;o
         <p>We invite you to join our mission to engineer solar-powered race cars that showcase sustainability and innovation. Your support builds a collaborative environment where diverse minds come together to achieve real impact — and empowers the next generation of engineers.</p>
         <p style="margin-top:14px">Whether you're a student looking for hands-on experience or a partner who shares our vision, there's a place for you on this team.</p>
         <div class="join-actions">
-          <a href="join-us/" class="btn btn-solid">Join the team
+          <a href="/join-us/" class="btn btn-solid">Join the team
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M7 17L17 7M17 7H8M17 7v9"/></svg>
           </a>
-          <a href="support-us/" class="btn btn-outline">Support Us
+          <a href="/support-us/" class="btn btn-outline">Support Us
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
           </a>
         </div>
       </div>
       <div class="join-photo reveal" data-d="1">
-        <img src="photos/teamphoto.jpg" alt="UCI Solar Car at the green flag">
+        <img loading="lazy" decoding="async" src="/photos/teamphoto.jpg" alt="UCI Solar Car at the green flag">
         <span class="tint" aria-hidden="true"></span>
         <span class="tag">The team · Formula Sun Grand Prix 2026</span>
       </div>
@@ -413,32 +407,32 @@ body::after{content:"";position:fixed;inset:0;z-index:9999;pointer-events:none;o
       </div>
       <div class="tier reveal">
         <div class="tier-bar"><span class="lbl plat">Platinum</span><span class="rule"></span></div>
-        <div class="logos c1"><div class="logo-card plat-card"><img src="photos/sponsors/4.png" alt="The Green Initiative Fund"></div></div>
+        <div class="logos c1"><div class="logo-card plat-card"><img loading="lazy" decoding="async" src="/photos/sponsors/4.png" alt="The Green Initiative Fund"></div></div>
       </div>
       <div class="tier reveal">
         <div class="tier-bar"><span class="lbl">Gold</span><span class="rule"></span></div>
         <div class="logos c3">
-          <div class="logo-card"><img src="photos/sponsors/5.png" alt="Maxeon"></div>
-          <div class="logo-card"><img src="photos/sponsors/6.png" alt="JAE"></div>
-          <div class="logo-card"><img src="photos/sponsors/7.png" alt="Codazen"></div>
+          <div class="logo-card"><img loading="lazy" decoding="async" src="/photos/sponsors/5.png" alt="Maxeon"></div>
+          <div class="logo-card"><img loading="lazy" decoding="async" src="/photos/sponsors/6.png" alt="JAE"></div>
+          <div class="logo-card"><img loading="lazy" decoding="async" src="/photos/sponsors/7.png" alt="Codazen"></div>
         </div>
       </div>
       <div class="tier reveal">
         <div class="tier-bar"><span class="lbl">Silver</span><span class="rule"></span></div>
         <div class="logos c5">
-          <div class="logo-card"><img src="photos/sponsors/8.png" alt="Kingspan"></div>
-          <div class="logo-card"><img src="photos/sponsors/9.png" alt="UCI ANTrepreneur Center"></div>
-          <div class="logo-card"><img src="photos/sponsors/10.png" alt="Adams Motorsports Park"></div>
-          <div class="logo-card"><img src="photos/sponsors/11.png" alt="Rohde &amp; Schwarz"></div>
-          <div class="logo-card"><img src="photos/sponsors/12.png" alt="UCI Samueli School of Engineering"></div>
+          <div class="logo-card"><img loading="lazy" decoding="async" src="/photos/sponsors/8.png" alt="Kingspan"></div>
+          <div class="logo-card"><img loading="lazy" decoding="async" src="/photos/sponsors/9.png" alt="UCI ANTrepreneur Center"></div>
+          <div class="logo-card"><img loading="lazy" decoding="async" src="/photos/sponsors/10.png" alt="Adams Motorsports Park"></div>
+          <div class="logo-card"><img loading="lazy" decoding="async" src="/photos/sponsors/11.png" alt="Rohde &amp; Schwarz"></div>
+          <div class="logo-card"><img loading="lazy" decoding="async" src="/photos/sponsors/12.png" alt="UCI Samueli School of Engineering"></div>
         </div>
       </div>
       <div class="tier reveal">
         <div class="tier-bar"><span class="lbl">Bronze</span><span class="rule"></span></div>
         <div class="logos c3">
-          <div class="logo-card"><img src="photos/sponsors/13.png" alt="Bender"></div>
-          <div class="logo-card"><img src="photos/sponsors/14.png" alt="Kenesto"></div>
-          <div class="logo-card"><img src="photos/sponsors/15.png" alt="Hawkeye Industries"></div>
+          <div class="logo-card"><img loading="lazy" decoding="async" src="/photos/sponsors/13.png" alt="Bender"></div>
+          <div class="logo-card"><img loading="lazy" decoding="async" src="/photos/sponsors/14.png" alt="Kenesto"></div>
+          <div class="logo-card"><img loading="lazy" decoding="async" src="/photos/sponsors/15.png" alt="Hawkeye Industries"></div>
         </div>
       </div>
     </div>
@@ -459,15 +453,7 @@ body::after{content:"";position:fixed;inset:0;z-index:9999;pointer-events:none;o
         </div>
       </div>
     </div>
-    <div class="ig-gallery reveal" data-d="1">
-      <a class="ig" href="https://www.instagram.com/p/DbMZuHPCefp/" target="_blank" rel="noopener"><img src="photos/instagram/1.jpg" alt="UCI Solar Car Instagram post" loading="lazy"><span class="ico"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1.1" fill="currentColor" stroke="none"/></svg></span></a>
-      <a class="ig" href="https://www.instagram.com/p/DbBh0GimiZB/" target="_blank" rel="noopener"><img src="photos/instagram/2.jpg" alt="UCI Solar Car Instagram post" loading="lazy"><span class="ico"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1.1" fill="currentColor" stroke="none"/></svg></span></a>
-      <a class="ig" href="https://www.instagram.com/p/DXYOBXFivxi/" target="_blank" rel="noopener"><img src="photos/instagram/3.jpg" alt="UCI Solar Car Instagram post" loading="lazy"><span class="ico"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1.1" fill="currentColor" stroke="none"/></svg></span></a>
-      <a class="ig" href="https://www.instagram.com/p/DbRtsi7J_C_/" target="_blank" rel="noopener"><img src="photos/instagram/4.jpg" alt="UCI Solar Car Instagram post" loading="lazy"><span class="ico"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1.1" fill="currentColor" stroke="none"/></svg></span></a>
-      <a class="ig" href="https://www.instagram.com/p/DZYOAlaEplG/" target="_blank" rel="noopener"><img src="photos/instagram/5.jpg" alt="UCI Solar Car Instagram post" loading="lazy"><span class="ico"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1.1" fill="currentColor" stroke="none"/></svg></span></a>
-      <a class="ig" href="https://www.instagram.com/p/DZEK5yRifqS/" target="_blank" rel="noopener"><img src="photos/instagram/6.jpg" alt="UCI Solar Car Instagram post" loading="lazy"><span class="ico"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1.1" fill="currentColor" stroke="none"/></svg></span></a>
-      <a class="ig" href="https://www.instagram.com/p/DbEGX03CVxe/" target="_blank" rel="noopener"><img src="photos/instagram/7.jpg" alt="UCI Solar Car Instagram post" loading="lazy"><span class="ico"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1.1" fill="currentColor" stroke="none"/></svg></span></a>
-    </div>
+    <div class="ig-track-mask reveal" data-d="1"><div class="ig-track" id="igTrack"></div></div>
   </section>
 
   <!-- FOOTER -->
@@ -481,14 +467,14 @@ body::after{content:"";position:fixed;inset:0;z-index:9999;pointer-events:none;o
       <div>
         <h4>Explore</h4>
         <a class="fl" href="#top">Home</a>
-        <a class="fl" href="about-us/">About Us</a>
-        <a class="fl" href="our-team/">Our Team</a>
-        <a class="fl" href="our-races/">Our Races</a>
-        <a class="fl" href="support-us/">Support Us</a><a class="fl" href="join-us/">Join Us</a>
+        <a class="fl" href="/about-us/">About Us</a>
+        <a class="fl" href="/our-team/">Our Team</a>
+        <a class="fl" href="/our-races/">Our Races</a>
+        <a class="fl" href="/support-us/">Support Us</a><a class="fl" href="/join-us/">Join Us</a>
       </div>
       <div>
         <h4>Contact</h4>
-        <a class="fl" href="mailto:solarcar@uci.edu">Email</a>
+        <a class="fl" href="mailto:ucirvinesolarcar@gmail.com">Email</a>
         <a class="fl" href="#support">Sponsor</a>
         <a class="fl" href="#support">Donate</a>
         <a class="fl" href="#">Irvine, CA</a>
@@ -572,6 +558,9 @@ function setMenu(open){
   toggle.setAttribute('aria-expanded',open);
   menu.setAttribute('aria-hidden',!open);
   if(lenis){ open?lenis.stop():lenis.start(); }
+  const links=menu.querySelectorAll('nav a');
+  if(open){ clearTimeout(menu._d); menu._d=setTimeout(()=>links.forEach(a=>a.style.transitionDelay='0s'),1200); } /* make hover instant after the stagger */
+  else { clearTimeout(menu._d); links.forEach(a=>a.style.transitionDelay=''); }
 }
 toggle.addEventListener('click',()=>setMenu(!menuOpen));
 menu.querySelectorAll('[data-link]').forEach(a=>a.addEventListener('click',e=>{
@@ -609,7 +598,7 @@ const COLLAGE = [
   {t:'img',  src:'photos/build.jpg',          x:5800,  y:10,  w:375, cap:''},
   {t:'img',  src:'photos/formula-sun.jpg',          x:5850,  y:53,  w:300, cap:'FSGP 2026 at Brainerd, MN'},
   {t:'text', big:'<span style="font-size:50px">First to Finish Scrutineering! Pole Position! </span>', sm:'', x:6300,  y:25, w:800},
-  {t:'img',  src:'photos/instagram.png',          x:6250,  y:45,  w:250, cap:'From zero to P1 Start!'},
+  {t:'img',  src:'photos/instagram.jpg',          x:6250,  y:45,  w:250, cap:'From zero to P1 Start!'},
   {t:'img',  src:'photos/green-flag.jpg',          x:6600,  y:43,  w:300, cap:'Green Flag!'},
   {t:'img',  src:'photos/car-track.jpg',          x:7100,  y:23,  w:400, cap:'Our Car on Track!'},
   {t:'img',  src:'photos/Pitstop.jpg',          x:7400,  y:60,  w:340, cap:'UCI at the Pitstop!'},
@@ -629,7 +618,7 @@ collageTrack.innerHTML=COLLAGE.map((it,idx)=>{
   const pos=`left:${X}px;top:${it.y}%;width:${it.w}px`;
   if(it.t==='img'){
     const z=it.zoom?' zoomitem" id="zoomItem':'';
-    return `<figure class="citem${z}" style="${pos}"><img src="${it.src}" alt="">${it.cap?`<figcaption>${it.cap}</figcaption>`:''}</figure>`;
+    return `<figure class="citem${z}" style="${pos}"><img loading="lazy" decoding="async" src="${it.src}" alt="">${it.cap?`<figcaption>${it.cap}</figcaption>`:''}</figure>`;
   }
   return `<div class="citem text" style="${pos}"><div class="big">${it.big}</div>${it.sm?`<div class="sm">${it.sm}</div>`:''}</div>`;
 }).join('');
@@ -719,14 +708,20 @@ onScroll(0);
 /* ---------- instagram marquee ---------- */
 const igTrack=document.getElementById('igTrack');
 if(igTrack){
-  const posts=['team-chase','car-track','team-group','green-flag','build','scrutineering'];
-  const set=posts.map((f,i)=>`<figure class="ig"><img src="photos/${f}.jpg" alt="UCI Solar Car post ${i+1}"><span class="ico"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1.1" fill="currentColor" stroke="none"/></svg></span></figure>`).join('');
-  igTrack.innerHTML=set+set;
+  const posts=[
+    'DbMZuHPCefp','DbBh0GimiZB','DXYOBXFivxi','DbRtsi7J_C_','DZYOAlaEplG','DZEK5yRifqS','DbEGX03CVxe'
+  ];
+  const ico='<span class="ico"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1.1" fill="currentColor" stroke="none"/></svg></span>';
+  const set=posts.map((code,i)=>`<a class="ig" href="https://www.instagram.com/p/${code}/" target="_blank" rel="noopener"><img src="/photos/instagram/${i+1}.jpg" alt="UCI Solar Car Instagram post" loading="lazy">${ico}</a>`).join('');
+  igTrack.innerHTML=set+set;   /* doubled → translateX(-50%) loops seamlessly */
 }
 
 /* ---------- reveal ---------- */
 const io=new IntersectionObserver((es)=>es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target)}}),{threshold:.14});
-document.querySelectorAll('.reveal').forEach(el=>io.observe(el));
+const _revealEls=document.querySelectorAll('.reveal');
+_revealEls.forEach(el=>io.observe(el));
+/* failsafe: never leave content hidden if the observer is throttled (e.g. iOS Low Power Mode) */
+addEventListener('load',()=>setTimeout(()=>_revealEls.forEach(el=>el.classList.add('in')),1500));
 
 /* ---------- racing stats: baseline rise, then climb in value ---------- */
 function countUp(n){
@@ -753,7 +748,7 @@ const cio=new IntersectionObserver((es)=>es.forEach(e=>{
 }),{threshold:.6});
 document.querySelectorAll('.rstat').forEach(s=>cio.observe(s));
 </script>
-<script>window.SITE_ROOT="./";window.IS_HOME=true;</script>
-<script src="common.js"></script>
+<script>window.SITE_ROOT="/";window.IS_HOME=true;</script>
+<script src="/common.js"></script>
 </body>
 </html>
