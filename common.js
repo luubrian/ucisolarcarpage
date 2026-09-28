@@ -4,22 +4,23 @@
    cookie consent + Google Analytics · footer contact form
    ============================================================ */
 (function(){
-  const path = location.pathname.split('/').pop() || 'index.html';
-  const isHome = (path === '' || path === 'index.html');
+  const ROOT = window.SITE_ROOT || '';           /* './' on home, '../' on a sub-page */
+  const isHome = !!window.IS_HOME;
+  const onJoin = /\/join-us\/?$/.test(location.pathname);
 
   /* ---- floating home logo (top-left, all pages) ---- */
   if(!document.querySelector('.site-logo')){
     const a=document.createElement('a');
-    a.className='site-logo'; a.href='index.html'; a.setAttribute('aria-label','UCI Solar Car — home');
-    a.innerHTML='<img src="photos/logo.png" alt="UCI Solar Car">';
+    a.className='site-logo'; a.href=ROOT||'./'; a.setAttribute('aria-label','UCI Solar Car — home');
+    a.innerHTML='<img src="'+ROOT+'photos/logo.png" alt="UCI Solar Car">';
     document.body.appendChild(a);
   }
 
   /* ---- recruiting pulse button (top-center; hidden on the Join page) ---- */
-  if(path!=='join.html' && !document.querySelector('.recruit-btn')){
+  if(!onJoin && !document.querySelector('.recruit-btn')){
     const r=document.createElement('a');
-    r.className='recruit-btn'; r.href='join.html';
-    r.textContent='Recruiting for Fall 2026';
+    r.className='recruit-btn'; r.href=ROOT+'join-us/';
+    r.innerHTML='<span>Recruiting for Fall 2026</span><span class="arr" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span>';
     document.body.appendChild(r);
   }
 
@@ -58,15 +59,17 @@
     const a=e.target.closest('a'); if(!a) return;
     const href=a.getAttribute('href'); if(!href) return;
     if(a.target==='_blank' || href.charAt(0)==='#' || /^(https?:|mailto:|tel:)/.test(href)) return;
-    if(/\.html($|[?#])/.test(href)){
-      e.preventDefault(); leaving=true; setNav(true);
-      if(reduce){ location.href=href; return; }
-      trans.classList.add('show');
-      void trans.offsetWidth;
-      trans.classList.add('cover');                    // 1) blue panels close into the center (1.4s)
-      setTimeout(()=>trans.classList.add('bar'),1700); // 2) slight pause, then 3) the line appears and grows
-      setTimeout(()=>{location.href=href;},2650);      // navigate once the line is full → new page parts open
-    }
+    let url; try{url=new URL(href, location.href);}catch(_){return;}
+    if(url.origin!==location.origin) return;                        // external link → leave it
+    if(/\.(?:png|jpe?g|webp|gif|svg|pdf|mp4|webm|mov|zip|docx?|xlsx?|csv)$/i.test(url.pathname)) return; // downloads
+    if(url.pathname===location.pathname) return;                    // same page
+    e.preventDefault(); leaving=true; setNav(true);
+    if(reduce){ location.href=url.href; return; }
+    trans.classList.add('show');
+    void trans.offsetWidth;
+    trans.classList.add('cover');                    // 1) blue panels close into the center (1.4s)
+    setTimeout(()=>trans.classList.add('bar'),1700); // 2) slight pause, then 3) the line appears and grows
+    setTimeout(()=>{location.href=url.href;},2650);  // navigate once the line is full → new page parts open
   });
 
   /* ---- logo click on home → scroll to top ---- */
@@ -82,16 +85,19 @@
     window.dataLayer=window.dataLayer||[]; function gtag(){dataLayer.push(arguments);} window.gtag=gtag;
     gtag('js',new Date()); gtag('config',GA_ID,{anonymize_ip:true});
   }
+  function showCookieBanner(delay){
+    const old=document.querySelector('.cookie'); if(old) old.remove();
+    const c=document.createElement('div'); c.className='cookie';
+    c.innerHTML='<p>We use cookies for basic site analytics to understand traffic and improve your experience. You can change this anytime.</p><div class="cbtns"><button class="dec">Decline</button><button class="ok">Accept</button></div>';
+    document.body.appendChild(c);
+    setTimeout(()=>c.classList.add('show'), delay||60);
+    const close=()=>{c.classList.remove('show'); setTimeout(()=>c.remove(),650);};
+    c.querySelector('.ok').onclick=()=>{try{localStorage.setItem('usc-consent','accepted');}catch(e){} close(); loadGA();};
+    c.querySelector('.dec').onclick=()=>{try{localStorage.setItem('usc-consent','declined');}catch(e){} close();};
+  }
   let consent=null; try{consent=localStorage.getItem('usc-consent');}catch(e){}
   if(consent==='accepted'){ loadGA(); }
-  else if(consent!=='declined'){
-    const c=document.createElement('div'); c.className='cookie';
-    c.innerHTML='<p>We use cookies for basic site analytics (Google Analytics) to improve your experience.</p><div class="cbtns"><button class="dec">Decline</button><button class="ok">Accept</button></div>';
-    document.body.appendChild(c);
-    setTimeout(()=>c.classList.add('show'),600);
-    c.querySelector('.ok').onclick=()=>{try{localStorage.setItem('usc-consent','accepted');}catch(e){} c.classList.remove('show'); loadGA();};
-    c.querySelector('.dec').onclick=()=>{try{localStorage.setItem('usc-consent','declined');}catch(e){} c.classList.remove('show');};
-  }
+  else if(consent!=='declined'){ showCookieBanner(600); }
 
   /* ---- footer contact form → emails ucirvinesolarcar@gmail.com via FormSubmit ---- */
   const cols=document.querySelectorAll('.footer-grid > div');
@@ -108,5 +114,15 @@
         '<textarea name="message" placeholder="Message" required></textarea>'+
         '<button type="submit">Send</button></form>';
     }
+  }
+
+  /* ---- "Cookie settings" control in the footer (re-open the consent choice) ---- */
+  const fb=document.querySelector('.footer-bottom');
+  if(fb && !fb.querySelector('.cookie-settings')){
+    const btn=document.createElement('button');
+    btn.type='button'; btn.className='cookie-settings'; btn.textContent='Cookie settings';
+    btn.addEventListener('click',()=>showCookieBanner(60));
+    const meta=fb.querySelector('.meta');
+    if(meta) meta.insertAdjacentElement('afterend',btn); else fb.appendChild(btn);
   }
 })();

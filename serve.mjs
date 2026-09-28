@@ -10,6 +10,8 @@ http.createServer(async (req,res)=>{
   try{
     let p = decodeURIComponent(req.url.split('?')[0]);
     if(p==='/'||p==='') p='/index.html';
+    else if(p.endsWith('/')) p=p+'index.html';           // /about-us/ -> /about-us/index.html
+    else if(!extname(p)) p=p+'/index.html';               // /about-us  -> /about-us/index.html (clean URL)
     const file = normalize(join(ROOT, p));
     const st = await stat(file);
     const type = TYPES[extname(file).toLowerCase()]||'application/octet-stream';
