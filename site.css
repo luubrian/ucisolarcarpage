@@ -63,7 +63,7 @@ body::after{content:"";position:fixed;inset:0;z-index:9999;pointer-events:none;o
 .menu nav a{font-family:'Eastman Grotesque',sans-serif;font-weight:700;font-style:italic;text-transform:uppercase;font-size:clamp(38px,8vw,104px);line-height:1;color:#fff;letter-spacing:-.02em;width:max-content;transition:color .35s var(--ease),transform .5s var(--ease),opacity .5s var(--ease);opacity:0;transform:translateY(24px)}
 .menu.open nav a{opacity:1;transform:none}
 .menu.open nav a:nth-child(1){transition-delay:.20s}.menu.open nav a:nth-child(2){transition-delay:.28s}.menu.open nav a:nth-child(3){transition-delay:.36s}.menu.open nav a:nth-child(4){transition-delay:.44s}.menu.open nav a:nth-child(5){transition-delay:.52s}.menu.open nav a:nth-child(6){transition-delay:.60s}
-.menu.open nav a:hover{color:var(--teal);transform:translateX(14px);transition-delay:0s;transition-duration:.22s}
+.menu.open nav a:hover{color:var(--teal);transform:translateX(14px);transition:color .18s var(--ease),transform .18s var(--ease)!important}
 .menu-foot{display:flex;gap:24px;margin-top:48px;flex-wrap:wrap;font-family:'Endless','Eastman Grotesque',sans-serif;font-size:12px;letter-spacing:.2em;text-transform:uppercase;color:var(--sky)}
 .menu-foot a{transition:color .3s var(--ease)}
 .menu-foot a:hover{color:#fff}
