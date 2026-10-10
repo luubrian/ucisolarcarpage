@@ -113,7 +113,8 @@
         '<div class="row2"><input type="text" name="name" placeholder="Name" required><input type="email" name="email" placeholder="Email" required></div>'+
         '<input type="text" name="subject" placeholder="Subject">'+
         '<textarea name="message" placeholder="Message" required></textarea>'+
-        '<button type="submit">Send</button></form>';
+        '<button type="submit">Send</button></form>'+
+        '<div class="footer-news"><a class="news-btn" href="https://ucisolarcar.substack.com/" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="M3 7l9 6 9-6"/></svg>Subscribe to newsletter</a></div>';
     }
   }
 

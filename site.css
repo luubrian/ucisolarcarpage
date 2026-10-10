@@ -246,6 +246,15 @@ body::after{content:"";position:fixed;inset:0;z-index:9999;pointer-events:none;o
 .cookie-settings{font-family:'Endless','Eastman Grotesque',sans-serif;font-size:11px;letter-spacing:.2em;text-transform:uppercase;color:rgba(255,255,255,.6);background:none;border:0;padding:0;cursor:pointer;text-decoration:underline;text-underline-offset:3px;transition:color .3s var(--ease)}
 .cookie-settings:hover{color:#fff}
 
+/* newsletter — embedded Substack on Join Us + footer subscribe button */
+.news-embed{max-width:480px;margin:clamp(30px,4vw,48px) auto 0;border-radius:12px;overflow:hidden;box-shadow:var(--shadow-lg);background:#fff;border:1px solid rgba(31,57,115,.12)}
+.news-embed iframe{display:block;width:100%;height:340px;border:0}
+.footer-news{margin-top:32px}
+.news-btn{display:inline-flex;align-items:center;gap:.6em;font-family:'Endless','Eastman Grotesque',sans-serif;font-size:11.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--royal);background:var(--jadePale);border-radius:100px;padding:11px 20px;text-decoration:none;transition:background .3s var(--ease),transform .3s var(--ease)}
+.news-btn svg{width:15px;height:15px}
+.news-btn:hover{background:#fff;transform:translateY(-2px)}
+.news-btn:focus-visible{outline:2px solid var(--jadePale);outline-offset:3px}
+
 .footer-contact h4{margin-bottom:12px}
 .contact-form{display:flex;flex-direction:column;gap:8px}
 .contact-form .row2{display:flex;gap:8px}
