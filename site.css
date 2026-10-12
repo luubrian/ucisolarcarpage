@@ -202,15 +202,20 @@ body::after{content:"";position:fixed;inset:0;z-index:9999;pointer-events:none;o
 .site-logo:hover{transform:translateY(-2px) scale(1.05)}
 @media(max-width:620px){.site-logo{width:48px;height:48px;top:16px;left:16px}}
 
-.recruit-btn{position:fixed;top:30px;left:50%;transform:translateX(-50%);z-index:1600;display:inline-flex;align-items:center;gap:.6em;font-family:'Endless','Eastman Grotesque',sans-serif;font-size:12px;letter-spacing:.16em;text-transform:uppercase;color:#fff;background:var(--cobalt);border:0;border-radius:100px;padding:12px 22px;cursor:pointer;text-decoration:none;box-shadow:0 6px 20px -6px rgba(13,13,99,.5);animation:recruitPulse 2.4s var(--ease) infinite}
-.recruit-btn::before{content:"";width:8px;height:8px;border-radius:50%;background:#fff;box-shadow:0 0 8px #fff;flex:none}
+/* announcement pills — side-by-side, centered bar at the top */
+.pill-bar{position:fixed;top:24px;left:50%;transform:translateX(-50%);z-index:1600;display:flex;flex-wrap:wrap;justify-content:center;align-items:center;gap:10px;max-width:94vw;transition:opacity .3s var(--ease)}
+.recruit-btn{display:inline-flex;align-items:center;gap:.5em;font-family:'Endless','Eastman Grotesque',sans-serif;font-size:10.5px;letter-spacing:.13em;text-transform:uppercase;color:#fff;background:var(--cobalt);border:0;border-radius:100px;padding:9px 17px;cursor:pointer;text-decoration:none;box-shadow:0 6px 20px -6px rgba(13,13,99,.5);animation:recruitPulse 2.4s var(--ease) infinite}
+.recruit-btn::before{content:"";width:7px;height:7px;border-radius:50%;background:#fff;box-shadow:0 0 8px #fff;flex:none}
 .recruit-btn .arr{display:inline-flex;flex:none;animation:recruitNudge 1.3s var(--ease) infinite}
-.recruit-btn .arr svg{width:14px;height:14px}
+.recruit-btn .arr svg{width:13px;height:13px}
 @keyframes recruitNudge{0%,100%{transform:translateX(0)}50%{transform:translateX(4px)}}
-.recruit-btn:hover{filter:brightness(1.12);transform:translateX(-50%) translateY(-1px)}
-.recruit-btn:active{transform:translateX(-50%) translateY(1px)}
+.recruit-btn:hover{filter:brightness(1.12);transform:translateY(-2px)}
+.recruit-btn:active{transform:translateY(1px)}
 @keyframes recruitPulse{0%{box-shadow:0 6px 20px -6px rgba(13,13,99,.5),0 0 0 0 rgba(129,186,196,.55)}70%{box-shadow:0 6px 20px -6px rgba(13,13,99,.5),0 0 0 15px rgba(129,186,196,0)}100%{box-shadow:0 6px 20px -6px rgba(13,13,99,.5),0 0 0 0 rgba(129,186,196,0)}}
-@media(max-width:720px){.recruit-btn{font-size:10px;padding:9px 15px;top:20px;letter-spacing:.1em}}
+@media(max-width:720px){.pill-bar{top:16px;gap:8px}.recruit-btn{font-size:9px;padding:8px 13px;letter-spacing:.07em}}
+/* pulsing donate button + deadline note (Support page) */
+.btn.zot-pulse{animation:recruitPulse 2.4s var(--ease) infinite}
+.donate-deadline{margin-top:22px;font-family:'Endless','Eastman Grotesque',sans-serif;font-weight:700;color:var(--jade);font-size:clamp(15px,1.5vw,18px);letter-spacing:.02em}
 
 /* ---- full-screen page transition: royal panels split apart with a jade center bar (same language as the intro loader) ---- */
 #pageTrans{position:fixed;inset:0;height:100lvh;z-index:6000;display:flex;pointer-events:none;visibility:hidden}
@@ -268,4 +273,4 @@ body::after{content:"";position:fixed;inset:0;z-index:9999;pointer-events:none;o
 .role-btns{display:flex;flex-wrap:wrap;gap:12px;margin-top:26px}
 .join-intro-space p+p{margin-top:20px}
 
-.menu.open ~ .site-logo,.menu.open ~ .recruit-btn{opacity:0;pointer-events:none;transition:opacity .3s var(--ease)}
+.menu.open ~ .site-logo,.menu.open ~ .pill-bar{opacity:0;pointer-events:none;transition:opacity .3s var(--ease)}

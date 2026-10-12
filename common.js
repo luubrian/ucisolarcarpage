@@ -16,12 +16,24 @@
     document.body.appendChild(a);
   }
 
-  /* ---- recruiting pulse button (top-center; hidden on the Join page) ---- */
-  if(!onJoin && !document.querySelector('.recruit-btn')){
-    const r=document.createElement('a');
-    r.className='recruit-btn'; r.href=ROOT+'join-us/';
-    r.innerHTML='<span>Recruiting for Fall 2026</span><span class="arr" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span>';
-    document.body.appendChild(r);
+  /* ---- announcement pills (top-center bar, side by side) ---- */
+  const arr='<span class="arr" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span>';
+  if(!document.querySelector('.pill-bar')){
+    const bar=document.createElement('div'); bar.className='pill-bar';
+    if(!onJoin){                                   /* Recruiting pill — every page except Join */
+      const r=document.createElement('a');
+      r.className='recruit-btn'; r.href=ROOT+'join-us/';
+      r.innerHTML='<span>Recruiting for Fall 2026</span>'+arr;
+      bar.appendChild(r);
+    }
+    if(isHome){                                    /* ZotFunder pill — home only */
+      const z=document.createElement('a');
+      z.className='recruit-btn zot-btn'; z.href='https://zotfunder.give.uci.edu/project/51095';
+      z.target='_blank'; z.rel='noopener';
+      z.innerHTML='<span>ZotFunder is Live — Donate!</span>'+arr;
+      bar.appendChild(z);
+    }
+    if(bar.children.length) document.body.appendChild(bar);
   }
 
   /* ---- page transition: royal panels split apart with a jade center bar ---- */
