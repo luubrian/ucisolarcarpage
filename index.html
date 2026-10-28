@@ -121,8 +121,20 @@ body::after{content:"";position:fixed;inset:0;z-index:9999;pointer-events:none;o
 .hero-media video{width:100%;height:100%;object-fit:cover;display:block}
 @keyframes kenburns{from{transform:scale(1.04)}to{transform:scale(1.16)}}
 .hero-scrim{position:absolute;inset:0;z-index:1;background:linear-gradient(180deg,rgba(9,12,40,.42),rgba(9,12,40,.5))}
-.hero .stream{z-index:2;color:rgba(255,255,255,.15)}
-.hero::after{content:"";position:absolute;inset:18px;border:2px solid #fff;border-radius:0;z-index:5;pointer-events:none}
+.hero .stream{display:none}   /* waves hidden on the hero (removed on request) */
+.hero::after{content:"";position:absolute;inset:18px;border:2px solid #fff;z-index:5;pointer-events:none}
+/* hero frame corner tabs */
+.hero-tab{position:absolute;z-index:6;background:#fff;color:var(--royal);display:inline-flex;align-items:center;text-decoration:none;box-shadow:0 16px 38px -14px rgba(0,0,0,.45);transition:transform .35s var(--ease),box-shadow .35s var(--ease)}
+.hero-tab.tl{top:0;left:0;padding:16px 30px;border-radius:0 0 24px 0}
+.hero-tab.tl img{height:62px;width:auto;display:block}
+.hero-tab.br{bottom:0;right:0;padding:16px 22px 16px 32px;gap:1em;border-radius:24px 0 0 0}
+.hero-tab.br .ht-text{display:flex;flex-direction:column;line-height:1.05;text-align:right}
+.hero-tab.br .ht-sub{font-family:'Endless','Eastman Grotesque',sans-serif;font-size:11.5px;letter-spacing:.18em;text-transform:uppercase;color:var(--jade)}
+.hero-tab.br .ht-main{font-family:'Eastman Grotesque',sans-serif;font-weight:700;font-style:italic;text-transform:uppercase;font-size:26px;color:var(--royal);letter-spacing:.01em}
+.hero-tab.br svg{width:24px;height:24px;color:var(--cobalt);flex:none}
+.hero-tab.br:hover{transform:translateY(-2px);box-shadow:0 20px 44px -14px rgba(0,0,0,.5)}
+.hero-tab.tl:hover{transform:translateY(-2px)}
+@media(max-width:620px){.hero::after{border-width:10px}.hero-tab.tl{padding:11px 18px}.hero-tab.tl img{height:42px}.hero-tab.br{padding:11px 15px 11px 20px}.hero-tab.br .ht-main{font-size:18px}.hero-tab.br .ht-sub{font-size:9.5px}.hero-tab.br svg{width:18px;height:18px}}
 .hero-inner{position:relative;z-index:3;text-align:center;padding-inline:var(--edge);will-change:filter,opacity,transform}
 .hero h1{font-family:'Endless','Eastman Grotesque',sans-serif;font-weight:700;font-style:italic;text-transform:uppercase;color:#fff;font-size:clamp(38px,11vw,215px);line-height:.86;letter-spacing:-.04em;white-space:nowrap;text-shadow:0 14px 60px rgba(0,0,0,.45);transform:scale(1.0,1.2);transform-origin:center}
 .scroll-cue{position:absolute;left:50%;bottom:32px;transform:translateX(-50%);z-index:4;display:flex;flex-direction:column;align-items:center;gap:12px;font-family:'Endless','Eastman Grotesque',sans-serif;font-size:10.5px;letter-spacing:.26em;text-transform:uppercase;color:rgba(255,255,255,.82)}
@@ -170,6 +182,10 @@ body::after{content:"";position:fixed;inset:0;z-index:9999;pointer-events:none;o
 .ff-btn:hover{background:var(--royal);color:#fff;border-color:var(--royal)}
 .hscroll-progress{position:absolute;left:var(--edge);right:var(--edge);bottom:34px;height:2px;background:rgba(18,32,58,.14)}
 .hscroll-progress span{display:block;height:100%;width:0;background:var(--jade)}
+.ff-btn{position:absolute;left:50%;bottom:48px;transform:translateX(-50%);z-index:6;display:inline-flex;align-items:center;gap:8px;background:var(--royal);color:#fff;border:0;border-radius:100px;padding:9px 18px 9px 15px;cursor:pointer;font-family:'Endless','Eastman Grotesque',sans-serif;font-size:10.5px;letter-spacing:.16em;text-transform:uppercase;box-shadow:var(--shadow-md);transition:background .3s var(--ease),transform .3s var(--ease),opacity .35s var(--ease)}
+.ff-btn svg{width:17px;height:17px}
+.ff-btn:hover{background:var(--cobalt);transform:translateX(-50%) translateY(-2px)}
+@media(max-width:620px){.ff-btn{bottom:44px;font-size:9.5px;padding:8px 14px 8px 12px}.ff-btn span{display:none}}
 /* StartLine zoom */
 .hscroll-track .zoomitem{z-index:3;transform-origin:center center;will-change:transform}
 .hscroll-track .zoomitem img{border-radius:8px}
@@ -353,6 +369,10 @@ body::after{content:"";position:fixed;inset:0;z-index:9999;pointer-events:none;o
         <h2><span class="rw">Go the distance</span></h2>
       </div>
       <div class="hscroll-progress" aria-hidden="true"><span id="collageBar"></span></div>
+      <button class="ff-btn" id="ffBtn" type="button" aria-label="Fast forward to the end">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M4 5l7 7-7 7M12 5l7 7-7 7"/></svg>
+        <span>Fast forward</span>
+      </button>
     </div>
   </section>
 
@@ -394,42 +414,31 @@ body::after{content:"";position:fixed;inset:0;z-index:9999;pointer-events:none;o
     </div>
   </section>
 
-  <!-- SPONSORS -->
-  <section class="section sponsors">
+  <!-- UPDATES FROM THE TEAM (latest Substack posts) -->
+  <section class="section updates">
     <div class="wrap">
-      <div class="sponsors-head reveal">
-        <span class="eyebrow" style="justify-content:center">Our Partners</span>
-        <h2 style="margin-top:14px">Powered by our partners</h2>
-        <p>Thank you to the sponsors who have made all of this possible.</p>
+      <div class="updates-head reveal">
+        <h2>Updates from the Team</h2>
       </div>
-      <div class="tier reveal">
-        <div class="tier-bar"><span class="lbl plat">Platinum</span><span class="rule"></span></div>
-        <div class="logos c1"><div class="logo-card plat-card"><img loading="lazy" decoding="async" src="/photos/sponsors/4.png" alt="The Green Initiative Fund"></div></div>
+      <div class="updates-grid" id="homeUpdates">
+        <p class="posts-status">Loading the latest posts…</p>
       </div>
-      <div class="tier reveal">
-        <div class="tier-bar"><span class="lbl">Gold</span><span class="rule"></span></div>
-        <div class="logos c3">
-          <div class="logo-card"><img loading="lazy" decoding="async" src="/photos/sponsors/5.png" alt="Maxeon"></div>
-          <div class="logo-card"><img loading="lazy" decoding="async" src="/photos/sponsors/6.png" alt="JAE"></div>
-          <div class="logo-card"><img loading="lazy" decoding="async" src="/photos/sponsors/7.png" alt="Codazen"></div>
-        </div>
-      </div>
-      <div class="tier reveal">
-        <div class="tier-bar"><span class="lbl">Silver</span><span class="rule"></span></div>
-        <div class="logos c5">
-          <div class="logo-card"><img loading="lazy" decoding="async" src="/photos/sponsors/8.png" alt="Kingspan"></div>
-          <div class="logo-card"><img loading="lazy" decoding="async" src="/photos/sponsors/9.png" alt="UCI ANTrepreneur Center"></div>
-          <div class="logo-card"><img loading="lazy" decoding="async" src="/photos/sponsors/10.png" alt="Adams Motorsports Park"></div>
-          <div class="logo-card"><img loading="lazy" decoding="async" src="/photos/sponsors/11.png" alt="Rohde &amp; Schwarz"></div>
-          <div class="logo-card"><img loading="lazy" decoding="async" src="/photos/sponsors/12.png" alt="UCI Samueli School of Engineering"></div>
-        </div>
-      </div>
-      <div class="tier reveal">
-        <div class="tier-bar"><span class="lbl">Bronze</span><span class="rule"></span></div>
-        <div class="logos c3">
-          <div class="logo-card"><img loading="lazy" decoding="async" src="/photos/sponsors/13.png" alt="Bender"></div>
-          <div class="logo-card"><img loading="lazy" decoding="async" src="/photos/sponsors/14.png" alt="Kenesto"></div>
-          <div class="logo-card"><img loading="lazy" decoding="async" src="/photos/sponsors/15.png" alt="Hawkeye Industries"></div>
+    </div>
+  </section>
+
+  <!-- NEWSLETTER BANNER -->
+  <section class="section">
+    <div class="wrap">
+      <div class="news-banner reveal">
+        <img class="nb-bg" src="/photos/newsletter-banner.jpg" alt="" aria-hidden="true">
+        <div class="nb-inner">
+          <span class="nb-pill">Newsletter</span>
+          <h2>Sign up to our Newsletter for progress updates!</h2>
+          <p>Build updates, race recaps, and behind-the-scenes from UCI Solar Car.</p>
+          <form class="nb-form" data-substack="https://ucisolarcar.substack.com">
+            <input type="email" name="email" placeholder="Email*" required aria-label="Email address">
+            <button type="submit">Subscribe</button>
+          </form>
         </div>
       </div>
     </div>
@@ -571,7 +580,7 @@ addEventListener('keydown',e=>{if(e.key==='Escape'&&menuOpen)setMenu(false);});
 let TRACK_W = 8800;
 const SPREAD = 100;   /* extra horizontal whitespace added between each item (by x order) */
 const COLLAGE = [
-  {t:'text', big:'The<br>Start Line', sm:'Starting in 2023, development on our Generation 1 vehicle — SolEater began.<span style="display:block;margin-top:26px"><a href="#skip" id="ffBtn" class="ff-btn">Fast Forward <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M4 5l8 6-8 6V5z"/><path d="M13 5l8 6-8 6V5z"/></svg></a></span>', x:1350,  y:28, w:380},
+  {t:'text', big:'The<br>Start Line', sm:'Starting in 2023, development on our Generation 1 vehicle — SolEater began.', x:1350,  y:28, w:380},
   {t:'img',  src:'photos/Aero_Manufacturing.jpg',          x:1800,  y:58,  w:350, cap:'Aerobody Manufacturing'},
   {t:'img',  src:'photos/BatteryManufacturing.jpg',          x:1850,  y:20,  w:300, cap:'Battery Manufacturing'},
   {t:'img',  src:'photos/SolarManufacturing.jpg',          x:2200,  y:50,  w:300, cap:'Solar Manufacturing'},
@@ -693,6 +702,7 @@ function onScroll(y){
   }
   if(zoomScrim)zoomScrim.style.opacity=zp.toFixed(3);
   if(collageBar)collageBar.parentElement.style.opacity=(1-zp).toFixed(3);
+  if(ffBtn){ffBtn.style.opacity=(1-zp).toFixed(3);ffBtn.style.pointerEvents=zp>0.5?'none':'auto';}
   if(zoomCopy)zoomCopy.classList.toggle('in', zp>=0.99);
 }
 computeSizes();

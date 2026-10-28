@@ -16,21 +16,14 @@
     document.body.appendChild(a);
   }
 
-  /* ---- announcement pills (top-center bar, side by side) ---- */
-  const arr='<span class="arr" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span>';
+  /* ---- ZotFunder announcement pill (top-center, home only) ---- */
   if(!document.querySelector('.pill-bar')){
     const bar=document.createElement('div'); bar.className='pill-bar';
-    if(!onJoin){                                   /* Recruiting pill — every page except Join */
-      const r=document.createElement('a');
-      r.className='recruit-btn'; r.href=ROOT+'join-us/';
-      r.innerHTML='<span>Recruiting for Fall 2026</span>'+arr;
-      bar.appendChild(r);
-    }
-    if(isHome){                                    /* ZotFunder pill — home only */
+    if(isHome){
       const z=document.createElement('a');
       z.className='recruit-btn zot-btn'; z.href='https://zotfunder.give.uci.edu/project/51095';
       z.target='_blank'; z.rel='noopener';
-      z.innerHTML='<span>ZotFunder is Live — Donate!</span>'+arr;
+      z.innerHTML='<span>ZotFunder is Live — Donate!</span><span class="arr" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span>';
       bar.appendChild(z);
     }
     if(bar.children.length) document.body.appendChild(bar);
@@ -139,4 +132,56 @@
     const meta=fb.querySelector('.meta');
     if(meta) meta.insertAdjacentElement('afterend',btn); else fb.appendChild(btn);
   }
+
+  /* ---- latest Substack posts (reads same-origin posts.json, refreshed by a GitHub Action) ---- */
+  const postsEl=document.getElementById('substackPosts');
+  if(postsEl){
+    const esc=s=>(s||'').replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+    const fallback=()=>{ postsEl.innerHTML='<a class="post-fallback" href="https://ucisolarcar.substack.com/" target="_blank" rel="noopener">Read our latest updates on Substack →</a>'; };
+    fetch(ROOT+'posts.json',{cache:'no-cache'}).then(r=>r.ok?r.json():Promise.reject()).then(d=>{
+      const items=(d&&d.posts)||[];
+      if(!items.length) return fallback();
+      postsEl.innerHTML=items.slice(0,3).map(it=>{
+        const dt=new Date(it.date);
+        const ds=isNaN(dt)?'':dt.toLocaleDateString('en-US',{month:'short',day:'numeric',year:'numeric'});
+        return '<a class="post-card" href="'+esc(it.link)+'" target="_blank" rel="noopener">'
+          +(it.image?'<div class="post-img"><img src="'+esc(it.image)+'" alt="" loading="lazy"></div>':'')
+          +'<div class="post-body"><span class="post-date">'+ds+'</span><h3>'+esc(it.title)+'</h3><p>'+esc(it.description)+'</p><span class="post-more">Read on Substack →</span></div></a>';
+      }).join('');
+      postsEl.classList.add('in');
+    }).catch(fallback);
+  }
+
+  /* ---- home "Updates from the Team": 2 feature cards + side list ---- */
+  const upEl=document.getElementById('homeUpdates');
+  if(upEl){
+    const esc=s=>(s||'').replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+    const fmt=s=>{const dt=new Date(s);return isNaN(dt)?'':dt.toLocaleDateString('en-US',{month:'short',day:'numeric',year:'numeric'});};
+    const fallback=()=>{ upEl.innerHTML='<a class="post-fallback" href="https://ucisolarcar.substack.com/" target="_blank" rel="noopener">Read our latest updates on Substack →</a>'; };
+    fetch(ROOT+'posts.json',{cache:'no-cache'}).then(r=>r.ok?r.json():Promise.reject()).then(d=>{
+      const items=(d&&d.posts)||[];
+      if(!items.length) return fallback();
+      const big=items.slice(0,2).map(it=>'<a class="update-big" href="'+esc(it.link)+'" target="_blank" rel="noopener">'
+        +(it.image?'<img src="'+esc(it.image)+'" alt="" loading="lazy">':'')
+        +'<div class="u-body"><span class="u-date">'+fmt(it.date)+'</span><h3>'+esc(it.title)+'</h3><p>'+esc(it.description)+'</p></div></a>').join('');
+      const rest=items.slice(2);
+      const list=rest.length ? '<div class="updates-list">'+rest.map(it=>'<a class="update-row" href="'+esc(it.link)+'" target="_blank" rel="noopener">'
+        +'<div class="r-img">'+(it.image?'<img src="'+esc(it.image)+'" alt="" loading="lazy">':'')+'</div>'
+        +'<div><span class="r-date">'+fmt(it.date)+'</span><h4>'+esc(it.title)+'</h4></div></a>').join('')+'</div>' : '';
+      upEl.innerHTML=big+list;
+      upEl.classList.toggle('no-list', rest.length===0);
+      upEl.classList.add('in');
+    }).catch(fallback);
+  }
+
+  /* ---- custom newsletter form → opens Substack subscribe with the email ---- */
+  document.querySelectorAll('.nb-form').forEach(f=>{
+    f.addEventListener('submit',e=>{
+      e.preventDefault();
+      const input=f.querySelector('input[type=email]');
+      const email=input?input.value.trim():'';
+      const base=(f.getAttribute('data-substack')||'https://ucisolarcar.substack.com').replace(/\/$/,'');
+      window.open(base+'/subscribe'+(email?'?email='+encodeURIComponent(email):''),'_blank','noopener');
+    });
+  });
 })();
