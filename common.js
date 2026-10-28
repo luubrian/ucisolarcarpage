@@ -16,17 +16,25 @@
     document.body.appendChild(a);
   }
 
-  /* ---- ZotFunder announcement pill (top-center, home only) ---- */
+  /* ---- stronger logo shadow once it sits over the light page content (below the dark hero/header) ---- */
+  (function(){
+    const logo=document.querySelector('.site-logo'); if(!logo) return;
+    const heroEl=document.querySelector('.hero'), headEl=document.querySelector('.page-head');
+    const darkAfter = heroEl ? innerHeight*0.72 : (headEl ? Math.max(0, headEl.offsetHeight-80) : 0);
+    const sync=()=>logo.classList.toggle('on-light', (window.__lenis?window.__lenis.scroll:scrollY) > darkAfter);
+    if(window.__lenis) window.__lenis.on('scroll',sync); else addEventListener('scroll',sync,{passive:true});
+    sync();
+  })();
+
+  /* ---- ZotFunder announcement pill (top-center, all pages) ---- */
   if(!document.querySelector('.pill-bar')){
     const bar=document.createElement('div'); bar.className='pill-bar';
-    if(isHome){
-      const z=document.createElement('a');
-      z.className='recruit-btn zot-btn'; z.href='https://zotfunder.give.uci.edu/project/51095';
-      z.target='_blank'; z.rel='noopener';
-      z.innerHTML='<span>ZotFunder is Live — Donate!</span><span class="arr" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span>';
-      bar.appendChild(z);
-    }
-    if(bar.children.length) document.body.appendChild(bar);
+    const z=document.createElement('a');
+    z.className='recruit-btn zot-btn'; z.href='https://zotfunder.give.uci.edu/project/51095';
+    z.target='_blank'; z.rel='noopener';
+    z.innerHTML='<span>ZotFunder is Live — Donate!</span><span class="arr" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span>';
+    bar.appendChild(z);
+    document.body.appendChild(bar);
   }
 
   /* ---- page transition: royal panels split apart with a jade center bar ---- */

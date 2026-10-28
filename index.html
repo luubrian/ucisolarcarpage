@@ -180,12 +180,12 @@ body::after{content:"";position:fixed;inset:0;z-index:9999;pointer-events:none;o
 .ff-btn{display:inline-flex;align-items:center;gap:.6em;font-family:'Endless','Eastman Grotesque',sans-serif;font-size:13px;letter-spacing:.14em;text-transform:uppercase;color:var(--cobalt);border:1px solid rgba(31,57,115,.35);border-radius:2px;padding:12px 20px;transition:color .4s var(--ease),background .4s var(--ease),border-color .4s var(--ease)}
 .ff-btn svg{width:16px;height:16px;flex:none}
 .ff-btn:hover{background:var(--royal);color:#fff;border-color:var(--royal)}
-.hscroll-progress{position:absolute;left:var(--edge);right:var(--edge);bottom:34px;height:2px;background:rgba(18,32,58,.14)}
+.hscroll-progress{position:absolute;left:calc(var(--edge) + 185px);right:var(--edge);bottom:34px;height:2px;background:rgba(18,32,58,.14)}
 .hscroll-progress span{display:block;height:100%;width:0;background:var(--jade)}
-.ff-btn{position:absolute;left:50%;bottom:48px;transform:translateX(-50%);z-index:6;display:inline-flex;align-items:center;gap:8px;background:var(--royal);color:#fff;border:0;border-radius:100px;padding:9px 18px 9px 15px;cursor:pointer;font-family:'Endless','Eastman Grotesque',sans-serif;font-size:10.5px;letter-spacing:.16em;text-transform:uppercase;box-shadow:var(--shadow-md);transition:background .3s var(--ease),transform .3s var(--ease),opacity .35s var(--ease)}
+.ff-btn{position:absolute;left:var(--edge);bottom:35px;transform:translateY(50%);z-index:6;display:inline-flex;align-items:center;gap:8px;background:var(--royal);color:#fff;border:0;border-radius:100px;padding:9px 18px 9px 15px;cursor:pointer;font-family:'Endless','Eastman Grotesque',sans-serif;font-size:10.5px;letter-spacing:.16em;text-transform:uppercase;box-shadow:0 4px 14px -4px rgba(13,13,99,.55);transition:background .3s var(--ease),transform .3s var(--ease),box-shadow .3s var(--ease),opacity .35s var(--ease)}
 .ff-btn svg{width:17px;height:17px}
-.ff-btn:hover{background:var(--cobalt);transform:translateX(-50%) translateY(-2px)}
-@media(max-width:620px){.ff-btn{bottom:44px;font-size:9.5px;padding:8px 14px 8px 12px}.ff-btn span{display:none}}
+.ff-btn:hover{background:var(--cobalt);transform:translateY(calc(50% - 2px));box-shadow:0 8px 20px -6px rgba(13,13,99,.6)}
+@media(max-width:620px){.ff-btn{font-size:9.5px;padding:8px 14px 8px 12px}.ff-btn span{display:none}.hscroll-progress{left:calc(var(--edge) + 58px)}}
 /* StartLine zoom */
 .hscroll-track .zoomitem{z-index:3;transform-origin:center center;will-change:transform}
 .hscroll-track .zoomitem img{border-radius:8px}
@@ -260,6 +260,14 @@ body::after{content:"";position:fixed;inset:0;z-index:9999;pointer-events:none;o
 .ig-track{display:flex;gap:16px;width:max-content;animation:marq 55s linear infinite}
 .ig-track:has(.ig:hover){animation-play-state:paused}   /* pause only when a post itself is hovered */
 @keyframes marq{to{transform:translateX(-50%)}}
+/* scrolling partners strip — grayscale, true color on hover */
+.partners-strip{padding-block:clamp(70px,9vw,120px)}
+.partners-head{text-align:center;margin-bottom:clamp(30px,4vw,48px)}
+.partners-head h2{font-family:'Eastman Grotesque',sans-serif;font-weight:700;font-style:italic;text-transform:uppercase;font-size:clamp(28px,4vw,52px);color:var(--royal);line-height:.95}
+.pstrip-mask{overflow:hidden;-webkit-mask-image:linear-gradient(90deg,transparent,#000 7%,#000 93%,transparent);mask-image:linear-gradient(90deg,transparent,#000 7%,#000 93%,transparent)}
+.pstrip-track{display:flex;align-items:center;gap:clamp(44px,6vw,96px);width:max-content;animation:marq 48s linear infinite}
+.pstrip-track img{height:clamp(38px,4vw,58px);width:auto;object-fit:contain;flex:none;filter:grayscale(1);opacity:.65;transition:filter .35s var(--ease),opacity .35s var(--ease)}
+.pstrip-track img:hover{filter:grayscale(0);opacity:1}
 .ig{position:relative;width:clamp(200px,22vw,270px);aspect-ratio:1;border-radius:5px;overflow:hidden;flex:none;box-shadow:var(--shadow-sm);isolation:isolate}
 .ig img{width:100%;height:100%;object-fit:cover;transition:transform .6s var(--ease)}
 .ig::after{content:"";position:absolute;inset:0;background:var(--cobalt);mix-blend-mode:multiply;opacity:0;transition:opacity .5s var(--ease);z-index:1}
@@ -389,6 +397,14 @@ body::after{content:"";position:fixed;inset:0;z-index:9999;pointer-events:none;o
     </div>
   </section>
 
+  <!-- POWERED BY OUR PARTNERS (scrolling · grayscale → true color on hover) -->
+  <section class="section partners-strip">
+    <div class="wrap">
+      <div class="partners-head reveal"><span class="eyebrow" style="justify-content:center">Our Partners</span><h2 style="margin-top:14px">Powered by our partners</h2></div>
+    </div>
+    <div class="pstrip-mask reveal" data-d="1"><div class="pstrip-track" id="partnersTrack"></div></div>
+  </section>
+
   <!-- JOIN / DONATE -->
   <section class="section join" id="support">
     <div class="wrap grid">
@@ -407,7 +423,7 @@ body::after{content:"";position:fixed;inset:0;z-index:9999;pointer-events:none;o
         </div>
       </div>
       <div class="join-photo reveal" data-d="1">
-        <img loading="lazy" decoding="async" src="/photos/teamphoto.jpg" alt="UCI Solar Car at the green flag">
+        <img loading="lazy" decoding="async" src="/photos/invest.jpg" alt="UCI Solar Car team at scrutineering">
         <span class="tint" aria-hidden="true"></span>
         <span class="tag">The team · Formula Sun Grand Prix 2026</span>
       </div>
@@ -415,10 +431,11 @@ body::after{content:"";position:fixed;inset:0;z-index:9999;pointer-events:none;o
   </section>
 
   <!-- UPDATES FROM THE TEAM (latest Substack posts) -->
-  <section class="section updates">
+  <section class="section updates" style="padding-bottom:clamp(26px,3vw,44px)">
     <div class="wrap">
       <div class="updates-head reveal">
-        <h2>Updates from the Team</h2>
+        <span class="eyebrow" style="justify-content:center">Our newsletter</span>
+        <h2 style="margin-top:14px">The Latest with our Team</h2>
       </div>
       <div class="updates-grid" id="homeUpdates">
         <p class="posts-status">Loading the latest posts…</p>
@@ -427,7 +444,7 @@ body::after{content:"";position:fixed;inset:0;z-index:9999;pointer-events:none;o
   </section>
 
   <!-- NEWSLETTER BANNER -->
-  <section class="section">
+  <section class="section" style="padding-top:0">
     <div class="wrap">
       <div class="news-banner reveal">
         <img class="nb-bg" src="/photos/newsletter-banner.jpg" alt="" aria-hidden="true">
@@ -449,7 +466,7 @@ body::after{content:"";position:fixed;inset:0;z-index:9999;pointer-events:none;o
     <div class="wrap">
       <div class="socials-head reveal">
         <div>
-          <span class="eyebrow">Follow along</span>
+          <span class="eyebrow">Our Socials</span>
           <h2 style="margin-top:14px">Follow our journey<br>as a team</h2>
         </div>
         <div class="social-links">
@@ -721,6 +738,14 @@ if(igTrack){
   const ico='<span class="ico"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1.1" fill="currentColor" stroke="none"/></svg></span>';
   const set=posts.map((code,i)=>`<a class="ig" href="https://www.instagram.com/p/${code}/" target="_blank" rel="noopener"><img src="/photos/instagram/${i+1}.jpg" alt="UCI Solar Car Instagram post" decoding="async">${ico}</a>`).join('');
   igTrack.innerHTML=set+set;   /* doubled → translateX(-50%) loops seamlessly */
+}
+
+/* ---------- partners strip (grayscale → color on hover) ---------- */
+const partnersTrack=document.getElementById('partnersTrack');
+if(partnersTrack){
+  const logos=[[4,'The Green Initiative Fund'],[5,'Maxeon'],[6,'JAE'],[7,'Codazen'],[8,'Kingspan'],[9,'UCI ANTrepreneur Center'],[10,'Adams Motorsports Park'],[11,'Rohde & Schwarz'],[12,'UCI Samueli School of Engineering'],[13,'Bender'],[14,'Kenesto'],[15,'Hawkeye Industries']];
+  const pset=logos.map(([n,a])=>`<img src="/photos/sponsors/${n}.png" alt="${a}" decoding="async">`).join('');
+  partnersTrack.innerHTML=pset+pset;   /* doubled for a seamless loop */
 }
 
 /* ---------- reveal ---------- */

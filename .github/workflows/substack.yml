@@ -1,35 +1,44 @@
 name: Refresh Substack posts
 
+# Keeps posts.json in sync with the Substack feed so the Home and Join Us
+# pages show the latest articles without a manual rebuild.
+
 on:
   schedule:
-    - cron: '0 */6 * * *'      # every 6 hours
-  workflow_dispatch:            # manual "Run workflow" button
-  push:
-    paths:
-      - 'scripts/fetch-substack.mjs'
-      - '.github/workflows/substack.yml'
+    - cron: '0 */6 * * *'   # every 6 hours
+  workflow_dispatch:         # allow manual runs from the Actions tab
 
+# Needed so the job can commit the refreshed posts.json back to the repo.
 permissions:
   contents: write
+
+concurrency:
+  group: refresh-substack
+  cancel-in-progress: false
 
 jobs:
   refresh:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
-      - uses: actions/setup-node@v4
+      - name: Check out the repository
+        uses: actions/checkout@v4
+
+      - name: Set up Node
+        uses: actions/setup-node@v4
         with:
-          node-version: '20'
-      - name: Fetch latest posts
+          node-version: 20
+
+      - name: Fetch the latest Substack posts
         run: node scripts/fetch-substack.mjs
+
       - name: Commit posts.json if it changed
         run: |
-          if ! git diff --quiet -- posts.json; then
-            git config user.name  "github-actions[bot]"
-            git config user.email "github-actions[bot]@users.noreply.github.com"
-            git add posts.json
-            git commit -m "Refresh Substack posts"
-            git push
+          git config user.name  "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          if git diff --quiet -- posts.json; then
+            echo "posts.json unchanged — nothing to commit."
           else
-            echo "posts.json unchanged"
+            git add posts.json
+            git commit -m "Auto-refresh Substack posts"
+            git push
           fi

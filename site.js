@@ -4,7 +4,7 @@
 /* streamlines */
 function buildStream(el){
   const cfg={
-    hero:{lines:26,amp:22,wl:300,sw:1,speed:22},
+    hero:{lines:26,amp:22,wl:300,sw:1,speed:70},
     menu:{lines:22,amp:18,wl:300,sw:1,speed:30},
     head:{lines:18,amp:18,wl:320,sw:1,speed:34},
     footer:{lines:14,amp:16,wl:320,sw:1,speed:38}
