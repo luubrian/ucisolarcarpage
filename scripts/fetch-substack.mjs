@@ -4,7 +4,9 @@ import { writeFileSync } from 'node:fs';
 
 const FEED  = 'https://ucisolarcar.substack.com/feed';
 const COUNT = 6;
-const UA    = 'Mozilla/5.0 (compatible; UCISolarCarBot/1.0; +https://ucisolarcar.org)';
+// Substack is behind Cloudflare, which 403s self-identified bots from datacenter
+// IPs (e.g. GitHub Actions). Send a normal browser User-Agent for our own feed.
+const UA    = 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/131.0.0.0 Safari/537.36';
 
 function tag(block, name){
   const m = block.match(new RegExp('<' + name + '>([\\s\\S]*?)</' + name + '>'));
